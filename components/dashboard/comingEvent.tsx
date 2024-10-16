@@ -25,15 +25,15 @@ export const ComingEvent = () => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: 'orange',
+        backgroundColor: 'white',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 5,
         padding: 15,
         borderColor: '#000',
-        borderWidth: 1.5,
+        borderWidth: 0.5,
         shadowColor: '#000',
         shadowOffset: {
           width: 5,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.3,
         shadowRadius: 10,
-        elevation: 3
+        elevation: 2
     },
     between: {
         display: 'flex',

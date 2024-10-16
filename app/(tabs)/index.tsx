@@ -2,6 +2,7 @@ import { Image, StyleSheet, Platform, View, Text, ScrollView } from 'react-nativ
 import Sidebar from '@/components/navigation/sidebar';
 import { ComingEvent } from '@/components/dashboard/comingEvent';
 import { Ionicons } from '@expo/vector-icons';
+import { YourLists } from '@/components/dashboard/yourLists';
 
 export default function HomeScreen() {
   return (
@@ -17,10 +18,11 @@ export default function HomeScreen() {
         
         <ComingEvent />
 
-        <View style={[styles.between, { width: '100%', marginTop: 15}]}>
+        <View style={[styles.between, { width: '100%'}]}>
           <Text style={styles.sectionLabel}>Your Lists</Text>
           <Ionicons name="ellipsis-horizontal" size={18} color={"black"}/>
         </View>
+        <YourLists />
       </ScrollView>
     </Sidebar>
 
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   scrollContainer: {
+    gap: 10
   },
   stepContainer: {
     gap: 8,
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
   sectionLabel: {
     paddingVertical: 4,
     fontSize: 18,
-    fontWeight: '500'
+    fontWeight: '600'
   },
   between: {
     display: 'flex',
