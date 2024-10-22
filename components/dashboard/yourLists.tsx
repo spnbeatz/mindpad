@@ -1,15 +1,15 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { ProgressBar } from "../progressBar";
+import { Ionicons } from "@expo/vector-icons";
 
 export const YourLists = () => {
 
     const data = [
-        { id: '1', title: 'Item 1' },
-        { id: '2', title: 'Item 2' },
-        { id: '3', title: 'Item 3' },
-        { id: '4', title: 'Item 4' },
-        { id: '5', title: 'Item 5' },
-        { id: '6', title: 'Item 6' },
+        { id: '1', title: 'Become a YouTuber', progress: 90 },
+        { id: '2', title: 'Learn cooking', progress: 25 },
+        { id: '3', title: 'Book list', progress: undefined },
+
     ];
 
     return (
@@ -17,7 +17,8 @@ export const YourLists = () => {
             {data.map(item => {
                 return (
                     <View style={styles.listItemContainer} key={item.id}>
-                        <Text>{item.title}</Text>
+                        <Text style={styles.title}>{item.title}</Text>
+                        <ProgressBar progress={item.progress} width={45}/>
                     </View>
                 )
             })}
@@ -27,22 +28,27 @@ export const YourLists = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        
+        justifyContent: 'flex-start',
 
         width: '100%',
         gap: 10
       },
       listItemContainer: {
-        width: '48%',
-        borderWidth: 0.5,
+        width: '100%',
+        borderWidth: 0.3,
         borderColor: '#000',
-        height: 100,
-        marginBottom: 4,
+        padding: 15,
         borderRadius: 5,
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: 10,
+        backgroundColor: 'white'
+      },
+      title: {
+        width: '50%'
       }
 })

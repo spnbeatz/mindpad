@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { GestureDetector, GestureHandlerRootView, Gesture } from 'react-native-gesture-handler';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
@@ -9,11 +9,10 @@ const { width } = Dimensions.get('window');
 interface SidebarProps {
   children: React.ReactNode;
   direction?: 'left' | 'right';
-  sideBarContent?: React.ReactNode;
   title?: string
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ children, direction = 'left', sideBarContent, title }) => {
+const Sidebar: React.FC<SidebarProps> = ({ children, direction = 'left', title }) => {
   const [isOpen, setIsOpen] = useState(false);
   const translateX = useSharedValue(direction === 'left' ? -width : width); // Ustawienie początkowej pozycji w zależności od kierunku
   const contentTranslateX = useSharedValue(0); // Nowa shared value do przesuwania treści
@@ -68,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, direction = 'left', sideBar
         {/* Sidebar */}
         <GestureDetector gesture={panGesture}>
           <Animated.View style={[styles.sidebar, animatedStyle]}>
-            {sideBarContent}
+
           </Animated.View>
         </GestureDetector>
 
@@ -83,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, direction = 'left', sideBar
         {!isOpen && <Text style={styles.title}>{title}</Text>}
         {/* Główna treść aplikacji */}
         <Animated.View style={[styles.content, contentStyle]}>
-          {children}
+            {children}
         </Animated.View>
       </View>
     </GestureHandlerRootView>
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#FFF',
     padding: 20,
-    zIndex: 1,
+    zIndex: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 5,
@@ -137,8 +136,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 85,
     paddingHorizontal: 20,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    position: 'relative'
   },
+  background: {
+    position: 'absolute',
+    resizeMode: 'cover'
+  }
 });
 
 export default Sidebar;

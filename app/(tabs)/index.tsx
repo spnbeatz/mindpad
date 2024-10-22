@@ -3,6 +3,7 @@ import Sidebar from '@/components/navigation/sidebar';
 import { ComingEvent } from '@/components/dashboard/comingEvent';
 import { Ionicons } from '@expo/vector-icons';
 import { YourLists } from '@/components/dashboard/yourLists';
+import { DailyMotivation } from '@/components/dashboard/note';
 
 export default function HomeScreen() {
   return (
@@ -11,18 +12,55 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollContainer}
         style={{width: '100%', height: '100%'}}
       >
-        <View style={[styles.between, { width: '100%'}]}>
-          <Text style={styles.sectionLabel}>Coming Event</Text>
-          <Ionicons name="ellipsis-horizontal" size={18} color={"black"}/>
-        </View>
-        
-        <ComingEvent />
 
-        <View style={[styles.between, { width: '100%'}]}>
-          <Text style={styles.sectionLabel}>Your Lists</Text>
-          <Ionicons name="ellipsis-horizontal" size={18} color={"black"}/>
+        <View style={styles.panelTitle}>
+          <View style={[styles.between, { width: '100%'}]}>
+            <Text style={styles.sectionLabel}>Coming Event</Text>
+            <Ionicons name="ellipsis-horizontal" size={18} color={"black"}/>
+          </View>
+          <View style={styles.orangeLine}/>
+          <Text style={styles.info}>Here you can see an upcoming event.</Text>
         </View>
+
+        <ComingEvent />
+        <View style={styles.panelTitle}>
+          <View style={[styles.between, { width: '100%'}]}>
+            <Text style={styles.sectionLabel}>Note</Text>
+            <Ionicons name="ellipsis-horizontal" size={18} color={"black"}/>
+          </View>
+          <View style={styles.orangeLine}/>
+          <Text style={styles.info}>You can add here a note, which contains your afirmation or anything you want.</Text>
+        </View>
+
+        <DailyMotivation />
+
+        <View style={styles.panelTitle}>
+          <View style={[styles.between, { width: '100%'}]}>
+            <Text style={styles.sectionLabel}>Your Targets</Text>
+            <View style={[styles.between, {gap: 10}]}>
+              <Ionicons name="add" size={20} color="black"/>
+              <Ionicons name="ellipsis-horizontal" size={18} color={"black"}/>
+            </View>
+            
+          </View>
+          <View style={styles.orangeLine}/>
+          <Text style={styles.info}>Here is a list of your goals. Click to go to editing.</Text>
+        </View>
+
         <YourLists />
+
+        <View style={styles.panelTitle}>
+          <View style={[styles.between, { width: '100%'}]}>
+            <Text style={styles.sectionLabel}>Daily</Text>
+            <View style={[styles.between, {gap: 10}]}>
+              <Ionicons name="add" size={20} color="black"/>
+              <Ionicons name="ellipsis-horizontal" size={18} color={"black"}/>
+            </View>
+            
+          </View>
+          <View style={styles.orangeLine}/>
+          <Text style={styles.info}>Your daily habits.</Text>
+        </View>
       </ScrollView>
     </Sidebar>
 
@@ -52,15 +90,34 @@ const styles = StyleSheet.create({
   sectionLabel: {
     paddingVertical: 4,
     fontSize: 18,
-    fontWeight: '600'
+    fontWeight: '600',
   },
   between: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
-},
-moreText: {
-  fontSize: 14
-}
+  },
+  moreText: {
+    fontSize: 14
+  },
+  marginTop: {
+    marginTop: 20
+  },
+  panelTitle: {
+    width: '100%',
+    display: 'flex',
+    marginTop: 20
+
+  },
+  info: {
+    color: '#888'
+  },
+  orangeLine: {
+    width: '40%',
+    borderRadius: 5,
+    elevation: 2,
+    height: 2,
+    backgroundColor: 'darkorange'
+  }
 });
