@@ -12,7 +12,7 @@ interface SidebarProps {
   title?: string
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ children, direction = 'left', title }) => {
+const DrawerContainer: React.FC<SidebarProps> = ({ children, direction = 'left', title }) => {
   const [isOpen, setIsOpen] = useState(false);
   const translateX = useSharedValue(direction === 'left' ? -width : width); // Ustawienie początkowej pozycji w zależności od kierunku
   const contentTranslateX = useSharedValue(0); // Nowa shared value do przesuwania treści
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
+    
   },
   button: {
     position: 'absolute',
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     right: 0, // Sidebar otwierający się z prawej
     width: width,
     height: '100%',
-    backgroundColor: '#FFF',
+    backgroundColor: '#F22',
     padding: 20,
     zIndex: 10,
     shadowColor: '#000',
@@ -145,5 +146,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Sidebar;
+export default DrawerContainer;
+
 

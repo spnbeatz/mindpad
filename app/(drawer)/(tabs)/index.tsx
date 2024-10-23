@@ -1,13 +1,14 @@
 import { Image, StyleSheet, Platform, View, Text, ScrollView } from 'react-native';
-import Sidebar from '@/components/navigation/sidebar';
+import DrawerContainer from '@/components/navigation/drawerContainer';
 import { ComingEvent } from '@/components/dashboard/comingEvent';
 import { Ionicons } from '@expo/vector-icons';
 import { YourLists } from '@/components/dashboard/yourLists';
 import { DailyMotivation } from '@/components/dashboard/note';
+import { Container } from '@/components/container';
 
 export default function HomeScreen() {
   return (
-    <Sidebar direction='left' title='Dashboard'>
+    <Container>
       <ScrollView 
         contentContainerStyle={styles.scrollContainer}
         style={{width: '100%', height: '100%'}}
@@ -62,7 +63,7 @@ export default function HomeScreen() {
           <Text style={styles.info}>Your daily habits.</Text>
         </View>
       </ScrollView>
-    </Sidebar>
+    </Container>
 
   );
 }
