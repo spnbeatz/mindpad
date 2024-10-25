@@ -6,6 +6,7 @@ import 'react-native-reanimated';
 import { AuthProvider } from './context/AuthContext';
 import { Drawer } from 'expo-router/drawer'
 import { useColorScheme } from '@/hooks/useColorScheme';
+import * as NavigationBar from 'expo-navigation-bar';
 import { 
   useFonts, 
   Poppins_100Thin, Poppins_100Thin_Italic,
@@ -37,6 +38,11 @@ export default function RootLayout() {
     Poppins_900Black, Poppins_900Black_Italic
     
   });
+
+  useEffect(() => {
+    // Ustaw kolor paska nawigacyjnego na przezroczysty
+    NavigationBar.setBackgroundColorAsync('black');
+  }, []);
 
   useEffect(() => {
     if (loaded) {
