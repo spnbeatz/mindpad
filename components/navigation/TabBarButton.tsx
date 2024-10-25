@@ -2,6 +2,7 @@ import { Pressable, View, StyleSheet } from "react-native";
 import { icons } from "@/assets/icons";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 import { useEffect } from "react";
+import { primary } from "@/constants/Colors";
 
 type RouteNames = 'index' | 'profile';
 
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     circle: {
         width: 50,
         height: 50,
-        backgroundColor: 'orange',
+        backgroundColor: primary,
         position: 'absolute',
         borderRadius: 50
     }

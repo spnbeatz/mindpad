@@ -6,6 +6,7 @@ import { Input } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { validatePassword } from '@/scripts/passwordValidation';
+import { primary } from '@/constants/Colors';
 
 export const Register = () => {
 
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
       fontSize: 14
     },
     button: {
-        backgroundColor: 'orange'
+        backgroundColor: primary
     },
     inputContainer: {
         width: '100%',
@@ -117,6 +118,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         fontSize: 14,
         fontWeight: 'bold',
-        color: 'orange'
+        color: primary
     }
   });

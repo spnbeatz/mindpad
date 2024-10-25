@@ -1,5 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import React from "react";
+import { primary } from "@/constants/Colors";
 
 interface SubmitButton {
     onPress?: () => void;
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
         
     },
     buttonSubmit: {
-        backgroundColor: 'orange',
+        backgroundColor: primary,
         marginTop: 20
     },
     buttonSwitcher: {

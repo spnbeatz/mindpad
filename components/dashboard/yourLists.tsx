@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { ProgressBar } from "../progressBar";
 import { Ionicons } from "@expo/vector-icons";
+import { PanelTitle } from "../PanelTitle";
+import { PanelCard } from "../PanelCard";
 
 export const YourLists = () => {
 
@@ -13,7 +15,8 @@ export const YourLists = () => {
     ];
 
     return (
-        <View style={styles.container}>
+        <PanelCard>
+            <PanelTitle title="Your Targets" infoText="Here is a list of your goals. Click to go to editing." hasAddIcon />
             {data.map(item => {
                 return (
                     <View style={styles.listItemContainer} key={item.id}>
@@ -22,19 +25,11 @@ export const YourLists = () => {
                     </View>
                 )
             })}
-        </View>
+        </PanelCard>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-        
-        justifyContent: 'flex-start',
-
-        width: '100%',
-        gap: 10
-      },
       listItemContainer: {
         width: '100%',
         borderWidth: 0.3,

@@ -2,6 +2,7 @@ import { View, StyleSheet } from "react-native";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { useState, useEffect } from "react";
 import { TabBarButton } from "./TabBarButton";
+import { primary } from "@/constants/Colors";
 
 let activeTabRouteName: string | null = 'index';
 
@@ -60,7 +61,7 @@ export const TabBar = ({ state, descriptors, navigation, insets }: BottomTabBarP
 
               isFocused={isFocused}
               routeName={route.name}
-              color={isFocused ? 'white' : 'darkorange'}
+              color={isFocused ? 'white' : primary}
           />
         )
       })}

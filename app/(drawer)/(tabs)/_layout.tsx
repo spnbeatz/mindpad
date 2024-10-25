@@ -5,6 +5,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { AntDesign } from '@expo/vector-icons';
 import { TabBar } from '@/components/navigation/TabBar';
 import DrawerContainer from '@/components/navigation/drawerContainer';
+import { primary } from '@/constants/Colors';
 
 
 export default function TabLayout() {
@@ -32,10 +33,10 @@ export default function TabLayout() {
           options={{
             title: 'Home',
             tabBarIcon: ({ color, focused }) => (
-              <AntDesign name='home' color={focused ? "white" :"darkorange"} size={28} style={{
+              <AntDesign name='home' color={focused ? "white" : primary} size={28} style={{
                 padding: 10,
                 borderRadius: 50,
-                backgroundColor: focused ? 'darkorange' : 'white'
+                backgroundColor: focused ? primary : 'white'
               }}/>
             ),
           }}
@@ -45,10 +46,10 @@ export default function TabLayout() {
           options={{
             title: 'Profile',
             tabBarIcon: ({ color, focused }) => (
-              <AntDesign name='user' color={focused ? "white" :"darkorange"} size={28} style={{
+              <AntDesign name='user' color={focused ? "white" : primary} size={28} style={{
                 padding: 10,
                 borderRadius: 50,
-                backgroundColor: focused ? 'darkorange' : 'white'
+                backgroundColor: focused ? primary : 'white'
               }}/>
             ),
           }}

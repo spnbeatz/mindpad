@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { primary } from "@/constants/Colors";
 
 export const ProgressBar = (
     {
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     },
     progress: {
         height: '100%',
-        backgroundColor: 'darkorange',
+        backgroundColor: primary,
         borderRadius: 5
     },
     container: {

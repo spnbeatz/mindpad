@@ -2,6 +2,7 @@ import { Drawer } from 'expo-router/drawer';
 import { Text, StyleSheet } from 'react-native';
 import { getActiveTabRouteName } from '@/components/navigation/TabBar';
 import SearchBar from '@/components/searchBar';
+import { primary } from '@/constants/Colors';
 
 export default function DrawerLayout() {
 
@@ -10,12 +11,13 @@ export default function DrawerLayout() {
     return (
         <Drawer
             screenOptions={{ 
-                headerShown: true, 
+                headerShown: false, 
                 swipeEdgeWidth: 0,
                 drawerType: 'slide',
-                drawerActiveBackgroundColor: 'darkorange',
+                drawerActiveBackgroundColor: primary,
                 drawerActiveTintColor: 'white',
                 headerTitleStyle: { fontSize: 18, fontWeight: 'bold' },
+                
                 
             }}
         >

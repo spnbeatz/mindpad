@@ -1,8 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
+import { PanelTitle } from "../PanelTitle";
+import { PanelCard } from "../PanelCard";
 
 export const DailyMotivation = () => {
     return (
-        <View style={styles.noteContainer}>
+        <PanelCard>
+            <PanelTitle title="Note" infoText="You can add here a note, which contains your affirmation or anything you want." />
             <Text style={styles.label}>Your daily motivation</Text>
             <Text style={styles.noteText}>
                 "I am capable, resilient, and open to the opportunities that come my way. I trust in my ability to create a fulfilling and joyful life."
@@ -11,22 +14,11 @@ export const DailyMotivation = () => {
             </Text>
 {/*             <View style={styles.triangle}/>
             <View style={[styles.triangle, {right: 0, bottom: 0, transform: 'rotate(0deg)'}]}/> */}
-        </View>
+        </PanelCard>
     )
 }
 
 const styles = StyleSheet.create({
-    noteContainer: {
-        width: '100%',
-        padding: 15,
-        borderRadius: 5,
-        borderWidth: 0.3,
-        borderColor: 'black',
-        backgroundColor: 'white',
-        elevation: 5,
-        position: 'relative',
-        overflow: 'hidden'
-    },
     label: {
         fontSize: 17,
         color: 'black',
