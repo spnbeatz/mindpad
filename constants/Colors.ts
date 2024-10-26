@@ -26,3 +26,5 @@ export const Colors = {
 };
 
 export const primary = 'slateblue';
+export const whiteSemiTransparent = 'rgba(255,255,255,0.4)';
+export const whiteLessTransparent = 'rgba(255,255,255,0.7)'

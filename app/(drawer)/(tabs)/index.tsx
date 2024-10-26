@@ -4,27 +4,19 @@ import { YourLists } from '@/components/dashboard/yourLists';
 import { DailyMotivation } from '@/components/dashboard/note';
 import { Container } from '@/components/container';
 import { Header } from '@/components/dashboard/Header';
-
-// Dane dotyczące sekcji, które będą renderowane przez FlatList
-const sections = [
-  {
-    key: 'comingEvent',
-    component: <ComingEvent/>, // Komponent do renderowania dla tej sekcji
-  },
-  {
-    key: 'dailyMotivation',
-    component: <DailyMotivation/>,
-  },
-  {
-    key: 'yourLists',
-    component: <YourLists/>,
-  },
-  // Dodaj więcej sekcji według potrzeby
-];
+import { SearchButton } from '@/components/SearchButton';
+import { SearchModal } from '@/components/SearchModal';
+import { useState } from 'react';
+import { YourTargetsList } from '@/components/dashboard/YourTargetsList';
 
 export default function HomeScreen() {
+
+  const [ searchOpen, setSearchOpen ] = useState<boolean>(false);
+
   return (
     <Container>
+      {!searchOpen && <SearchButton openSearch={() => setSearchOpen(true)} />}
+      {searchOpen && <SearchModal closeSearch={() => setSearchOpen(false)} searchOpen={searchOpen}/>}
 {/*       <FlatList
         data={sections} // Przekazywanie sekcji do FlatList
         contentContainerStyle={styles.scrollContainer}
@@ -36,6 +28,7 @@ export default function HomeScreen() {
         )}
       /> */}
       <Header />
+      <YourTargetsList />
     </Container>
   );
 }

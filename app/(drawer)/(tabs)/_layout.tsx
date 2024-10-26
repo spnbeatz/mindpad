@@ -4,7 +4,7 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AntDesign } from '@expo/vector-icons';
 import { TabBar } from '@/components/navigation/TabBar';
-import DrawerContainer from '@/components/navigation/drawerContainer';
+
 import { primary } from '@/constants/Colors';
 
 
@@ -20,9 +20,10 @@ export default function TabLayout() {
           tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
           headerShown: false,
           tabBarLabelStyle: { display: 'none' },
+          
           tabBarStyle: { // Dodanie stylizacji paska nawigacji
             borderTopWidth: 0, // Usunięcie linii oddzielającej
-            backgroundColor: 'white', // Możesz dostosować tło
+            backgroundColor: 'black', // Możesz dostosować tło
             elevation: 0, // Usunięcie cienia (Android)
             
           },

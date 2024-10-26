@@ -39,13 +39,10 @@ export default function RootLayout() {
     
   });
 
-  useEffect(() => {
-    // Ustaw kolor paska nawigacyjnego na przezroczysty
-    NavigationBar.setBackgroundColorAsync('black');
-  }, []);
 
   useEffect(() => {
     if (loaded) {
+      NavigationBar.setBackgroundColorAsync('black');
       SplashScreen.hideAsync();
     }
   }, [loaded]);
@@ -54,8 +51,10 @@ export default function RootLayout() {
     return null;
   }
 
+
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DarkTheme}>
       <AuthProvider>
         <Stack>
           <Stack.Screen name="(drawer)" options={{ headerShown: false }}/>
