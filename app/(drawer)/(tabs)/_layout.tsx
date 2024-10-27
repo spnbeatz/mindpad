@@ -43,6 +43,19 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
+          name="notes"
+          options={{
+            title: 'Notes',
+            tabBarIcon: ({ color, focused }) => (
+              <AntDesign name='filetext1' color={focused ? "white" : primary} size={28} style={{
+                padding: 10,
+                borderRadius: 50,
+                backgroundColor: focused ? primary : 'white'
+              }}/>
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="profile"
           options={{
             title: 'Profile',
@@ -55,6 +68,7 @@ export default function TabLayout() {
             ),
           }}
         />
+
 
       </Tabs>
 

@@ -4,7 +4,7 @@ import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring, wi
 import { useEffect } from "react";
 import { primary } from "@/constants/Colors";
 
-type RouteNames = 'index' | 'profile';
+type RouteNames = 'index' | 'profile' | 'notes';
 
 interface TabBarButtonProps {
     isFocused: boolean,
@@ -66,9 +66,7 @@ export const TabBarButton = (props: TabBarButtonProps) => {
             <Animated.View style={[animatedIconStyle, {zIndex: 5}]}>
                 { icons[routeName as RouteNames]({color}) }
             </Animated.View>
-            <Animated.View style={[animatedCircleStyle, styles.circle]}>
-
-            </Animated.View>
+            <Animated.View style={[animatedCircleStyle, styles.circle]}/>
         </Pressable>
     )
 }
@@ -85,7 +83,7 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: primary,
         position: 'absolute',
-        borderRadius: 50
+        borderRadius: 15
     }
 
 

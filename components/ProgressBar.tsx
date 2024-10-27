@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { primary } from "@/constants/Colors";
+import { primary, whiteLessTransparent } from "@/constants/Colors";
+
 
 export const ProgressBar = (
     {
@@ -16,6 +17,10 @@ export const ProgressBar = (
         <View style={[styles.container, {width: `${width}%`}]}>
             {progress ? (
                 <>
+                    <View style={styles.progressBarLabelContainer}>
+                        <Text style={styles.label}>Progress</Text>
+                        <Text style={styles.label}>{`${progress}%`}</Text>
+                    </View>
                     <View 
                         style={{
                             ...styles.progressBarContainer, 
@@ -25,7 +30,7 @@ export const ProgressBar = (
 
                         </View>
                     </View>
-                    <Text style={styles.percent}>{`${progress}%`}</Text>
+                    
                 </>
 
             ): (
@@ -53,23 +58,24 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         overflow: 'hidden',
-        backgroundColor: 'white',
-        width: '75%'
+        backgroundColor: 'rgba(0,0,0,0.4)',
+        width: '100%'
     },
     progress: {
         height: '100%',
-        backgroundColor: primary,
+        backgroundColor: 'white',
         borderRadius: 5
     },
     container: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 10
+        gap: 2
     },
-    percent: {
-
+    label: {
+        color: whiteLessTransparent,
+        fontWeight: 'bold'
     },
     noProgress: {
         fontSize: 13,
@@ -81,5 +87,11 @@ const styles = StyleSheet.create({
         gap: 8,
         alignItems: 'center',
         flexDirection: 'row'
+    },
+    progressBarLabelContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     }
 })

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingHorizontal: 25,
         paddingVertical: 10,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     backgroundWrapper: {
         position: 'absolute',

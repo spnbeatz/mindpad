@@ -1,8 +1,8 @@
-import DrawerContainer from "@/components/navigation/drawerContainer";
+
 import { View } from "react-native";
 import { Container } from "@/components/container";
 
-export default function ProfileScreen() {
+export default function NotesScreen() {
     return (
         <Container>
             <View></View>

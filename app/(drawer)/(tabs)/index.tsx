@@ -8,6 +8,7 @@ import { SearchButton } from '@/components/SearchButton';
 import { SearchModal } from '@/components/SearchModal';
 import { useState } from 'react';
 import { YourTargetsList } from '@/components/dashboard/YourTargetsList';
+import { IncomingTasks } from '@/components/dashboard/IncomingTasks';
 
 export default function HomeScreen() {
 
@@ -29,6 +30,7 @@ export default function HomeScreen() {
       /> */}
       <Header />
       <YourTargetsList />
+      <IncomingTasks />
     </Container>
   );
 }

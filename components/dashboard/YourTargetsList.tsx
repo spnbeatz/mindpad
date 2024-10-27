@@ -14,14 +14,19 @@ export const YourTargetsList = () => {
             id: '1',
             colors: ["#c60e82", "#fd085f"],
             backgroundImage: CardBackground1,
-            title: 'Read 100 books'
+            title: 'Read books about programming',
+            progress: 80,
+            initials: 'RB'
         },
         {
             id: '2',
             colors: ["#102a99", "#13697e"],
             backgroundImage: CardBackground2,
-            title: 'Start career'
-        }
+            title: 'Start career',
+            progress: 20,
+            initials: 'SC'
+        },
+
         
         
     ]
