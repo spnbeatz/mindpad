@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Auth } from '../auth/auth';
+import { Login } from '../auth/login';
+import { Register } from '../auth/register';
 
 interface AuthContextType {
   user: any; 

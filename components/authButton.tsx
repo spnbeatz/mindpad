@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
     },
     buttonSwitcher: {
         borderColor: '#888',
-        borderWidth: 1
+        borderWidth: 1,
+
     },
     text: {
         color: 'white',

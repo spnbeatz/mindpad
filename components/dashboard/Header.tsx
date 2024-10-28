@@ -27,9 +27,6 @@ export const Header = () => {
                     <Feather name='bell' size={18} color={whiteLessTransparent}/>
                 </TouchableOpacity>
             </View>
-
-{/*             <Text style={styles.cardLabel}>It's time to take action!</Text>
-            <Text style={styles.cardSubLabel}>Just take a look at what you need to do soon.</Text> */}
         </View>
     )
 }

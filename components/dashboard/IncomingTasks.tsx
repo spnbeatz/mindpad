@@ -1,10 +1,11 @@
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from "react-native";
 import { whiteSemiTransparent, whiteLessTransparent } from "@/constants/Colors";
 import { Task } from "../Task";
+import { useState } from "react";
 
 export const IncomingTasks = () => {
 
-    const tasks = [
+    const [tasks, setTasks] = useState([
         {
             id: '1',
             name: 'Read clean code',
@@ -34,7 +35,15 @@ export const IncomingTasks = () => {
             targetInitials: 'RB',
             targetColors:["#c60e82", "#fd085f"]
         }
-    ]
+    ]);
+
+    const [ animateList, setAnimateList ] = useState<boolean>(false);
+
+    const deleteTask = (index: number) => {
+        const list = [...tasks];
+        list.splice(index, 1);
+        setTasks(list);
+    }
 
     return (
         <View style={styles.container}>
@@ -44,9 +53,9 @@ export const IncomingTasks = () => {
                 keyExtractor={(item) => item.id}
 
                 showsVerticalScrollIndicator={false}
-                renderItem={({item}) => {
+                renderItem={({item, index}) => {
                     return (
-                        <Task task={item}/>
+                        <Task task={item} deleteTask={() => deleteTask(index)}/>
                     )
                 }}
             />

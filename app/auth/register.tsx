@@ -32,6 +32,7 @@ export const Register = () => {
               <Input 
                 style={styles.input}
                 containerStyle={styles.inputContainer}
+                inputContainerStyle={{borderBottomWidth: 0, paddingHorizontal: 10}}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 value={values.email}
@@ -47,6 +48,7 @@ export const Register = () => {
               <Input
                 style={styles.input}
                 containerStyle={styles.inputContainer}
+                inputContainerStyle={{borderBottomWidth: 0, paddingHorizontal: 10}}
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 value={values.password}
@@ -67,6 +69,7 @@ export const Register = () => {
               <Input
                 style={[styles.input]}
                 containerStyle={styles.inputContainer}
+                inputContainerStyle={{borderBottomWidth: 0, paddingHorizontal: 10}}
                 onChangeText={handleChange('passwordRepeat')}
                 onBlur={handleBlur('passwordRepeat')}
                 value={values.passwordRepeat}
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
       marginBottom: 8,
     },
     input: {
-      paddingLeft: 8,
+      padding: 18,
       width: '100%',
       fontSize: 14
     },
@@ -112,7 +115,9 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '100%',
-        height: 50
+        height: 50,
+        backgroundColor: 'rgba(255,255,255,0.1)',
+        borderRadius: 20
     },
     forgotPassword: {
         alignSelf: 'flex-end',

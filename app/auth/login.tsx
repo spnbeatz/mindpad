@@ -29,6 +29,7 @@ export const Login = () => {
               >
                 <Input 
                   style={styles.input}
+                  inputContainerStyle={{borderBottomWidth: 0, paddingHorizontal: 10}}
                   containerStyle={styles.inputContainer}
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
@@ -43,6 +44,7 @@ export const Login = () => {
                 <Input
                   style={styles.input}
                   containerStyle={styles.inputContainer}
+                  inputContainerStyle={{borderBottomWidth: 0, paddingHorizontal: 10}}
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
                   value={values.password}
@@ -85,21 +87,25 @@ const styles = StyleSheet.create({
       marginBottom: 8,
     },
     input: {
-      paddingLeft: 8,
+      padding: 18,
       width: '100%',
-      fontSize: 14
+      fontSize: 14,
+
     },
     button: {
         backgroundColor: primary
     },
     inputContainer: {
         width: '100%',
-        height: 50
+        height: 50,
+        backgroundColor: 'rgba(255,255,255,0.1)',
+        borderRadius: 20,
     },
     forgotPassword: {
         alignSelf: 'flex-end',
         fontSize: 14,
         fontWeight: 'bold',
         color: primary
-    }
+    },
+    
   });

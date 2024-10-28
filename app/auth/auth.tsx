@@ -1,43 +1,40 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { Login } from "./login";
 import { Register } from "./register";
 import BackgroundImage from '@/app/assets/loginbackground.jpg';
 import { AuthBtn } from "@/components/authButton";
+import { Container } from "@/components/container";
+
 
 export const Auth = () => {
 
     const [ login, setLogin ] = useState<boolean>(true);
 
     return (
-        <KeyboardAvoidingView
-            style={{flex: 1, width: '100%', flexDirection: 'column', justifyContent: 'flex-end'}}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for different platforms
-            keyboardVerticalOffset={30}
-        >
-            <ScrollView 
-                contentContainerStyle={styles.scrollContainer}
-                keyboardShouldPersistTaps="handled"
-            >
-                <View style={styles.upperContainer}>
-                    <Image source={BackgroundImage} style={styles.backgroundImage}/>
-                    <Text style={styles.titleText}>
-                        {login ? "Welcome \nback!" : "Create \naccount."}
-                    </Text>
-                </View>
+        <Container>
+            <KeyboardAvoidingView
+                style={{flex: 1, width: '100%', flexDirection: 'column', justifyContent: 'flex-end'}}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for different platforms
+                keyboardVerticalOffset={30}
+            >  
+                
+                    <ScrollView 
+                        contentContainerStyle={styles.scrollContainer}
+                        keyboardShouldPersistTaps="handled"
+                    >
 
-                <View style={styles.lowerContainer}>
-                    {login ? <Login/> : <Register />}
-                    <View style={styles.divider}>
-                        <Text style={styles.dividerText}>or</Text>
-                    </View>
-                    
-                    <AuthBtn onPress={() => setLogin(!login)} isSwitch={true} type={login ? 'register' : 'login'}/>
-                </View>
+                        <View style={styles.lowerContainer}>
+                            {login ? <Login/> : <Register />}
+                            <AuthBtn onPress={() => setLogin(!login)} isSwitch={true} type={login ? 'register' : 'login'}/>
+                        </View>
 
 
-            </ScrollView>
-        </KeyboardAvoidingView>
+                    </ScrollView>
+                
+
+            </KeyboardAvoidingView>
+        </Container>
     )
 }
 
@@ -70,7 +67,7 @@ const styles = StyleSheet.create({
         padding: 20,
         flex: 1, // Umożliwia dolnemu kontenerowi zajęcie reszty dostępnej przestrzeni
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         gap: 30
     },
     switch: {
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
     divider: {
         width: '100%',
         height: 1,
-        backgroundColor: '#BBB',
+        backgroundColor: 'rgba(255,255,255,0.2)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
@@ -115,7 +112,7 @@ const styles = StyleSheet.create({
         color: '#999',
         padding: 4,
         paddingHorizontal: 10,
-        backgroundColor: 'white'
+        backgroundColor: 'black'
     }
     
     

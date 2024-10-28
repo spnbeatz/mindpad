@@ -13,7 +13,13 @@ interface TaskProps {
     targetColors: string[]
 }
 
-export const Task = ({task}: {task: TaskProps}) => {
+export const Task = ({
+    task,
+    deleteTask
+}:{
+    task: TaskProps,
+    deleteTask: () => void
+}) => {
 
     const [ done, setDone ] = useState<boolean>(false);
     const [ display, setDisplay ] = useState<boolean>(true)
@@ -28,18 +34,17 @@ export const Task = ({task}: {task: TaskProps}) => {
 
     useEffect(() => {
         if(done == true) {
-            opacityValue.value = withDelay(300, withTiming(0, { duration: 300}));
+            
+            opacityValue.value = withDelay(300, withTiming(0, { duration: 300}));        }
+    }, [done]);
 
-            setTimeout(() => {
-                setDisplay(false);
-            }, 1200);
-        }
-
-
-    }, [done])
 
     const handleDoneTask = () => {
         setDone(true);
+        setTimeout(() => {   
+            deleteTask();        
+        }, 1000)
+        
     }
 
     return (
