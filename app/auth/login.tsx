@@ -5,13 +5,15 @@ import { AuthBtn } from '@/components/authButton';
 import { Input } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { primary } from '@/constants/Colors';
+import { primary, whiteSemiTransparent } from '@/constants/Colors';
 
-export const Login = () => {
+export const Login = ({
+  login
+}:{
+  login: (userData: any) => void
+}) => {
 
     const [ passwordHidden, setPasswordHidden ] = useState<boolean>(true);
-    const { login } = useAuth();
 
     return (
           <Formik
@@ -44,7 +46,7 @@ export const Login = () => {
                 <Input
                   style={styles.input}
                   containerStyle={styles.inputContainer}
-                  inputContainerStyle={{borderBottomWidth: 0, paddingHorizontal: 10}}
+                  inputContainerStyle={{borderBottomWidth: 0, paddingHorizontal: 10, }}
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
                   value={values.password}
@@ -90,6 +92,7 @@ const styles = StyleSheet.create({
       padding: 18,
       width: '100%',
       fontSize: 14,
+      color: 'white'
 
     },
     button: {
@@ -98,8 +101,9 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: 50,
-        backgroundColor: 'rgba(255,255,255,0.1)',
+        backgroundColor: 'rgba(0,0,0,0.4)',
         borderRadius: 20,
+
     },
     forgotPassword: {
         alignSelf: 'flex-end',

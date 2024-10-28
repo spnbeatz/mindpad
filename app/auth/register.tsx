@@ -108,7 +108,8 @@ const styles = StyleSheet.create({
     input: {
       padding: 18,
       width: '100%',
-      fontSize: 14
+      fontSize: 14,
+      color: 'white'
     },
     button: {
         backgroundColor: primary
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: 50,
-        backgroundColor: 'rgba(255,255,255,0.1)',
+        backgroundColor: 'rgba(0,0,0,0.4)',
         borderRadius: 20
     },
     forgotPassword: {

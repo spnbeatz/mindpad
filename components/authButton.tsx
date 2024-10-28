@@ -31,18 +31,19 @@ export const AuthBtn: React.FC<SubmitButton> = ({ onPress, isSwitch, type }) => 
 const styles = StyleSheet.create({
     btnMainStyle: {
         padding: 16,
-        borderRadius: 5,
+        borderRadius: 20,
         alignItems: 'center',
         width: '100%',
+
         
     },
     buttonSubmit: {
         backgroundColor: primary,
-        marginTop: 20
+        marginTop: 20,
+        elevation: 5
     },
     buttonSwitcher: {
-        borderColor: '#888',
-        borderWidth: 1,
+
 
     },
     text: {

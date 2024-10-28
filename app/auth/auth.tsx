@@ -2,35 +2,42 @@ import React, { useState } from "react"
 import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { Login } from "./login";
 import { Register } from "./register";
-import BackgroundImage from '@/app/assets/loginbackground.jpg';
 import { AuthBtn } from "@/components/authButton";
 import { Container } from "@/components/container";
+import { whiteLessTransparent } from "@/constants/Colors";
+import Bg from '@/assets/images/loginScreenBg.png';
 
 
-export const Auth = () => {
+export const Auth = ({
+    login
+}:{
+    login: (userData: any) => void
+}) => {
 
-    const [ login, setLogin ] = useState<boolean>(true);
+    const [ loginScreen, setloginScreen ] = useState<boolean>(true);
+
 
     return (
         <Container>
             <KeyboardAvoidingView
-                style={{flex: 1, width: '100%', flexDirection: 'column', justifyContent: 'flex-end'}}
+                style={{flex: 1, width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'center'}}
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for different platforms
                 keyboardVerticalOffset={30}
             >  
-                
-                    <ScrollView 
-                        contentContainerStyle={styles.scrollContainer}
-                        keyboardShouldPersistTaps="handled"
-                    >
+                <Image source={Bg} style={styles.backgroundImage}/>
+                <ScrollView 
+                    contentContainerStyle={styles.scrollContainer}
+                    keyboardShouldPersistTaps="handled"
+                >
+                    <View></View>
+                    <View style={styles.lowerContainer}>
+                        <Text style={styles.headerText}>{loginScreen ? 'Welcome back!' : 'Join us!'}</Text>
+                        {loginScreen ? <Login login={login}/> : <Register />}
+                        <AuthBtn onPress={() => setloginScreen(!loginScreen)} isSwitch={true} type={loginScreen ? 'register' : 'login'}/>
+                    </View>
 
-                        <View style={styles.lowerContainer}>
-                            {login ? <Login/> : <Register />}
-                            <AuthBtn onPress={() => setLogin(!login)} isSwitch={true} type={login ? 'register' : 'login'}/>
-                        </View>
 
-
-                    </ScrollView>
+                </ScrollView>
                 
 
             </KeyboardAvoidingView>
@@ -48,9 +55,10 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         flexGrow: 1,
-        justifyContent: 'center', // Center contents vertically in the ScrollView
+        justifyContent: 'space-between', // Center contents vertically in the ScrollView
         alignItems: 'center',
         flexDirection: 'column',
+
       },
     upperContainer: {
         height: '50%',
@@ -64,11 +72,13 @@ const styles = StyleSheet.create({
     },
     lowerContainer: {
         width: '100%',
-        padding: 20,
-        flex: 1, // Umożliwia dolnemu kontenerowi zajęcie reszty dostępnej przestrzeni
+        paddingVertical: 40,
+        borderRadius: 20,
+
         display: 'flex',
         justifyContent: 'center',
-        gap: 30
+        gap: 30,
+
     },
     switch: {
         display: 'flex',
@@ -85,9 +95,13 @@ const styles = StyleSheet.create({
         fontSize: 11
     },
     backgroundImage: {
-        resizeMode: 'cover',
-        width: '100%',
-        height: '100%'
+        opacity: 0.2,
+        bottom: 0,
+        width: '200%',
+        height: '100%',
+        marginLeft: -410,
+        position: 'absolute',
+        zIndex: -10
     },
     titleText: {
         fontSize: 35,
@@ -113,6 +127,11 @@ const styles = StyleSheet.create({
         padding: 4,
         paddingHorizontal: 10,
         backgroundColor: 'black'
+    },
+    headerText: {
+        fontSize: 35,
+        color: whiteLessTransparent,
+        marginBottom: 20
     }
     
     
