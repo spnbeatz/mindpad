@@ -39,9 +39,9 @@ export const YourTargetsList = () => {
                 horizontal
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => <TargetListItem item={item} />}
-                ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
                 snapToAlignment="start"  // Wyrównanie do początku
                 decelerationRate="fast"
+                contentContainerStyle={{paddingRight: 40}}
                 style={styles.list}
                 showsHorizontalScrollIndicator={false}
                 pagingEnabled
@@ -52,12 +52,13 @@ export const YourTargetsList = () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
+        width: '110%',
         justifyContent: 'center',
         alignItems: 'center',
         paddingLeft: 10,
         paddingVertical: 20,
-        gap: 20
+        gap: 20,
+        marginLeft: 35
     },
     label: {
         color: whiteSemiTransparent,
@@ -75,7 +76,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     list: {
-        gap: 10
+        gap: 10,
+        width: '100%',
+
     },
     backgroundImage: {
         width: '100%',

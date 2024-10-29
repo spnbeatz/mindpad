@@ -81,7 +81,7 @@ export const Task = ({
 const styles = StyleSheet.create({
     taskContainer: {
         width: '100%',
-        height: 70,
+        height: 65,
         borderRadius: 15,
         backgroundColor: 'rgba(255,255,255,0.1)',
         flexDirection: 'row',

@@ -1,10 +1,11 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ImageSourcePropType } from 'react-native';
 import { ProgressBar } from './ProgressBar';
 import { Feather } from '@expo/vector-icons';
 import { whiteLessTransparent } from '@/constants/Colors';
 import React from 'react';
+import { useRouter } from 'expo-router';
 
 interface ItemProps {
     id: string,
@@ -16,47 +17,65 @@ interface ItemProps {
 }
 
 export const TargetListItem= ({item}: {item: ItemProps}) => {
+
+    const router = useRouter();
+
     return (
-        <LinearGradient style={[styles.listItemContainer]} colors={item.colors}>
-            <Image source={item.backgroundImage} style={styles.backgroundImage}/>
-            <View style={styles.contentContainer}>
-                <Text style={styles.listItemLabel}>{item.title}</Text>
-                <ProgressBar progress={item.progress} />
-            </View>
-            <View style={styles.targetDateContainer}>
-                <Feather name="target" size={12} color={whiteLessTransparent} />
-                <Text style={styles.targetDate}>31.12.2024</Text>
-            </View>
-            <View style={styles.daysLeftContainer}>
-                <Text style={styles.daysLeftText}>122 days</Text>
-            </View>
-            <View style={styles.initialsBox}>
-                <Text style={styles.initials}>
-                    {item.initials}
-                </Text>
-            </View>
-        </LinearGradient>
+        <TouchableOpacity onPress={() => router.push('/TargetScreen')}>
+            <LinearGradient style={[styles.listItemContainer]} colors={item.colors}>
+                <Image source={item.backgroundImage} style={styles.backgroundImage}/>
+
+                <View style={styles.between}>
+                    <View style={styles.targetDateContainer}>
+                        <Feather name="target" size={12} color={whiteLessTransparent} />
+                        <Text style={styles.targetDate}>31.12.2024</Text>
+                    </View>
+                    <View style={styles.initialsBox}>
+                        <Text style={styles.initials}>
+                            {item.initials}
+                        </Text>
+                    </View>
+                </View>
+                <View style={styles.contentContainer}>
+                    <Text style={styles.listItemLabel}>{item.title}</Text>
+                    
+                </View>
+                <View style={styles.between}>
+                    <ProgressBar progress={item.progress} width={70}/>
+                    <View style={styles.daysLeftContainer}>
+                        <Text style={styles.daysLeftText}>122 days</Text>
+                    </View>
+                </View>
+
+
+            </LinearGradient>
+        </TouchableOpacity>
+
     )
 }
 
 const styles = StyleSheet.create({
     backgroundImage: {
-        width: '100%',
-        height: '100%',
+        width: '120%',
+        height: '120%',
         position: 'absolute',
-        bottom: 0,
-        right: 0,
+        left: 0,
+        top: 0,
         opacity: 0.4,
+        marginLeft: -10,
+        
         
     },
     listItemContainer: {
-        width: 167,
+        width: 320,
         height: 200,
         borderRadius: 25,
         elevation: 5,
         overflow: 'hidden',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
+        padding: 20,
+        marginRight: 40
     },
     listItemLabel: {
         fontSize: 16,
@@ -68,7 +87,6 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         width: '100%',
-        height: '60%',
         padding: 15,
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -79,9 +97,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
-        left: 15,
-        top: 15,
         gap: 5
     },
     targetDate: {
@@ -93,9 +108,6 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
-        bottom: 15,
-        right: 15,
         borderRadius: 5,
         backgroundColor: 'white',
         elevation: 5
@@ -106,9 +118,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     initialsBox: {
-        position: 'absolute',
-        right: 15,
-        top: 15,
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 10,
@@ -121,5 +130,13 @@ const styles = StyleSheet.create({
         fontSize: 10,
         color: 'white',
         fontWeight: 'bold'
+    },
+    between: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between',
+
+        gap: 10,
+        width: '100%'
     }
 })
