@@ -7,7 +7,7 @@ import { whiteLessTransparent } from '@/constants/Colors';
 import React from 'react';
 import { useRouter } from 'expo-router';
 
-interface ItemProps {
+export interface TargetProps {
     id: string,
     colors: string[],
     backgroundImage: ImageSourcePropType,
@@ -16,12 +16,15 @@ interface ItemProps {
     initials: string
 }
 
-export const TargetListItem= ({item}: {item: ItemProps}) => {
+export const TargetListItem= ({item}: {item: TargetProps}) => {
 
     const router = useRouter();
 
     return (
-        <TouchableOpacity onPress={() => router.push('/TargetScreen')}>
+        <TouchableOpacity onPress={() => router.push({
+            pathname: '/TargetScreen',
+            params: { target: JSON.stringify(item) }, // Pass the parameter here
+        })}>
             <LinearGradient style={[styles.listItemContainer]} colors={item.colors}>
                 <Image source={item.backgroundImage} style={styles.backgroundImage}/>
 

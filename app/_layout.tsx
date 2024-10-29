@@ -59,7 +59,7 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(drawer)" options={{ headerShown: false }}/>
           <Stack.Screen name="+not-found" />
-          <Stack.Screen name="TargetScreen" />
+          <Stack.Screen name="TargetScreen" options={{ headerShown: false}}/>
         </Stack>
 
       </AuthProvider>

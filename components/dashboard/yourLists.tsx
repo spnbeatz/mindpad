@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { ProgressBar } from "../progressBar";
+import { ProgressBar } from "../ProgressBar";
 import { Ionicons } from "@expo/vector-icons";
 import { PanelTitle } from "../PanelTitle";
 import { PanelCard } from "../PanelCard";
