@@ -9,8 +9,9 @@ interface TaskProps {
     id: string,
     name: string,
     end: string,
-    targetInitials: string,
-    targetColors: string[]
+    targetInitials?: string,
+    targetColors?: string[],
+    finished?: boolean
 }
 
 export const Task = ({
@@ -18,7 +19,7 @@ export const Task = ({
     deleteTask
 }:{
     task: TaskProps,
-    deleteTask: () => void
+    deleteTask?: () => void
 }) => {
 
     const [ done, setDone ] = useState<boolean>(false);
@@ -42,7 +43,10 @@ export const Task = ({
     const handleDoneTask = () => {
         setDone(true);
         setTimeout(() => {   
-            deleteTask();        
+            if(deleteTask){
+                deleteTask(); 
+            }
+                   
         }, 1000)
         
     }
@@ -69,9 +73,9 @@ export const Task = ({
                 <View style={styles.timeLeftBox}>
                     <Text style={styles.timeLeft}>30m</Text>
                 </View>
-                <LinearGradient colors={task.targetColors} style={styles.targetInitialsContainer}>
+                {task.targetColors && <LinearGradient colors={task.targetColors} style={styles.targetInitialsContainer}>
                     <Text style={styles.initialsText}>{task.targetInitials}</Text>
-                </LinearGradient>
+                </LinearGradient>}
             </View>
 
         </Animated.View>

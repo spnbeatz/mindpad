@@ -1,10 +1,11 @@
 import { Container } from "@/components/container";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, FlatList } from "react-native";
 import { TargetProps } from "@/components/TargetListItem";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Loading } from "@/components/Loading";
 import { LinearGradient } from "expo-linear-gradient";
+import { TargetTasksContainer } from "@/components/TargetTasksContainer";
 
 type RouteParams = {
     params: {
@@ -25,6 +26,8 @@ export default function TargetScreen() {
         }
     },[target]);
 
+    const tabs = [<TargetTasksContainer/>]
+
     if(!targetData) {
         return (
             <Loading />
@@ -37,6 +40,14 @@ export default function TargetScreen() {
                 <Image source={targetData.backgroundImage} style={styles.backgroundImage}/>
                 <Text style={styles.targetName}>{targetData.title}</Text>
             </LinearGradient>
+            <FlatList
+                style={styles.tabsList}
+
+                horizontal
+                data={tabs}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item}) => item}
+            />
         </Container>
     )
 }
@@ -64,5 +75,9 @@ const styles = StyleSheet.create({
         opacity: 0.4,
         marginLeft: -20,
         marginTop: -20
+    },
+    tabsList: {
+        width: '100%',
+
     }
 })

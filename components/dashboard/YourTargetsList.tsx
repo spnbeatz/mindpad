@@ -1,6 +1,5 @@
-import { View, StyleSheet, Text, FlatList, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Text, FlatList } from "react-native";
 import { whiteSemiTransparent } from "@/constants/Colors";
-import { LinearGradient } from "expo-linear-gradient";
 import CardBackground1 from '@/assets/images/cardbcg3.png';
 import CardBackground2 from '@/assets/images/cardbcg2.png';
 import { TargetListItem } from "../TargetListItem";
