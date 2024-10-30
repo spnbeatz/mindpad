@@ -6,9 +6,6 @@ import { Task } from "./Task";
 const { width } = Dimensions.get('window');
 
 export const TargetTasksContainer = () => {
-
-
-
     const [checkpoints, setCheckpoints] = useState([
         { 
             date: '30.10.2024', 
@@ -33,19 +30,19 @@ export const TargetTasksContainer = () => {
             title: 'Read 40 books',
             tasks: [
                 {
-                    id: '1',
-                    name: "Hello",
-                    end: "25.11.2024",
-                    finished: false
-                },
-                {
-                    id: '2',
-                    name: "Hello",
-                    end: "25.11.2024",
-                    finished: false
-                },
-                {
                     id: '3',
+                    name: "Hello",
+                    end: "25.11.2024",
+                    finished: false
+                },
+                {
+                    id: '4',
+                    name: "Hello",
+                    end: "25.11.2024",
+                    finished: false
+                },
+                {
+                    id: '5',
                     name: "Hello",
                     end: "25.11.2024",
                     finished: false
@@ -54,16 +51,16 @@ export const TargetTasksContainer = () => {
         },
         { 
             date: '30.01.2025', 
-            title: 'Read 50 books',
+            title: 'Read 50 books, and think about future',
             tasks: [
                 {
-                    id: '1',
+                    id: '6',
                     name: "Hello",
                     end: "25.11.2024",
                     finished: false
                 },
                 {
-                    id: '2',
+                    id: '7',
                     name: "Hello",
                     end: "25.11.2024",
                     finished: false
@@ -76,26 +73,31 @@ export const TargetTasksContainer = () => {
     const tasksListRef = useRef<FlatList>(null);
     const checkpointsListRef = useRef<FlatList>(null);
 
-    // Funkcja obsługująca przewijanie drugiego `FlatList`
+    // Scroll function for the second FlatList
     const scrollToTaskGroup = (index: number) => {
         tasksListRef.current?.scrollToIndex({ index, animated: true });
     };
 
-    const finishTask = (checkpoint: number, task: number) => {
-
-        const checkCopy = [...checkpoints];   
-        checkCopy[checkpoint].tasks.splice(task, 1);
-        setCheckpoints(checkCopy);
-    
-    }
+    // Update finishTask to remove empty checkpoints
+    const finishTask = (checkpointIndex: number, taskIndex: number) => {
+        setCheckpoints(prevCheckpoints =>
+            prevCheckpoints
+                .map((checkpoint, idx) =>
+                    idx === checkpointIndex
+                        ? { ...checkpoint, tasks: checkpoint.tasks.filter((_, i) => i !== taskIndex) }
+                        : checkpoint
+                )
+                .filter(checkpoint => checkpoint.tasks.length > 0) // Remove checkpoints with no tasks
+        );
+    };
 
     return (
         <View style={styles.container}>
-            {/* Pierwszy FlatList */}
+            {/* First FlatList */}
             <FlatList
                 ref={checkpointsListRef}
-                style={{ borderRightWidth: 0.5, paddingVertical: 10, borderColor: whiteLessTransparent }}
-                contentContainerStyle={{ gap: 40 }}
+                style={{ borderRightWidth: 0.5, width: '20%', paddingVertical: 10, borderColor: whiteLessTransparent }}
+                contentContainerStyle={{ gap: 40}}
                 data={checkpoints}
                 keyExtractor={(item) => item.date}
                 renderItem={({ item, index }) => {
@@ -103,7 +105,7 @@ export const TargetTasksContainer = () => {
                     return (
                         <TouchableOpacity onPress={() => {
                             setSelectedIndex(index);
-                            scrollToTaskGroup(index); // Przewijamy do odpowiedniego elementu w drugim `FlatList`
+                            scrollToTaskGroup(index); // Scroll to the corresponding element in the second FlatList
                         }}>
                             <View style={styles.checkpointItem}>
                                 <Text style={[styles.checkpointText, { fontWeight: active ? 'bold' : 'normal' }]}>
@@ -121,16 +123,14 @@ export const TargetTasksContainer = () => {
                 }}
             />
 
-            {/* Drugi FlatList */}
+            {/* Second FlatList */}
             <FlatList
                 ref={tasksListRef}
                 data={checkpoints}
                 style={{ width: '65%' }}
-
                 keyExtractor={(item) => item.date}
                 onScrollToIndexFailed={() => {}}
                 onViewableItemsChanged={({ viewableItems }) => {
-                    // Zmieniamy selectedIndex, gdy element staje się widoczny
                     const visibleItem = viewableItems[0];
                     if (visibleItem) {
                         setSelectedIndex(visibleItem.index ?? 0);
@@ -142,11 +142,10 @@ export const TargetTasksContainer = () => {
                 }}
                 renderItem={({ item, index }) => {
                     return (
-                        <View style={styles.taskGroup}>                            
-                            {item.tasks.map((task: any, i: number) => {
-        
-                                return !task.finished ? <Task key={i} task={task} deleteTask={() => finishTask(index, i)}/> : null;
-                            })}
+                        <View style={styles.taskGroup}>
+                            {item.tasks.map((task: any) => (
+                                <Task key={task.id} task={task} deleteTask={() => finishTask(index, item.tasks.findIndex((t: any) => t.id === task.id))} />
+                            ))}
                         </View>
                     );
                 }}
@@ -157,11 +156,13 @@ export const TargetTasksContainer = () => {
 };
 
 
+
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
 
-        width: width - 50,
+        width: width - 10,
         height: '100%'
     },
     checkpointItem: {
@@ -173,10 +174,11 @@ const styles = StyleSheet.create({
     },
     checkpointText: {
         color: whiteLessTransparent,
-        fontSize: 12
+        fontSize: 12,
+        width: '70%'
     },
     divider: {
-        width: '100%',
+        width: '50%',
         height: 0.5,
         backgroundColor: whiteLessTransparent,
         justifyContent: 'center',
@@ -203,7 +205,6 @@ const styles = StyleSheet.create({
     taskGroup: {
         width: '100%',
         paddingLeft: 15,
-        gap: 15
     },
     taskText: {
         fontSize: 14,

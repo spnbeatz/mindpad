@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { Loading } from "@/components/Loading";
 import { LinearGradient } from "expo-linear-gradient";
 import { TargetTasksContainer } from "@/components/TargetTasksContainer";
+import { whiteLessTransparent, whiteSemiTransparent } from "@/constants/Colors";
+import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 type RouteParams = {
     params: {
@@ -13,12 +16,17 @@ type RouteParams = {
     };
 };
 
+const tabsButtons = ['Tasks', 'Habits', 'Notes'];
+
 export default function TargetScreen() {
+
+    const router = useRouter();
 
     const route = useRoute<RouteProp<RouteParams, 'params'>>();
     const { target } = route.params;
 
     const [ targetData, setTargetData ] = useState<TargetProps | null>(null)
+    const [ activeTab, setActiveTab ] = useState<string>(tabsButtons[0]);
 
     useEffect(() => {
         if(target) {
@@ -36,31 +44,72 @@ export default function TargetScreen() {
 
     return (
         <Container>
-            <LinearGradient style={styles.header} colors={targetData.colors}>
+            <View style={styles.header}>
+                <View style={styles.topHeader}>
+                    <Feather name='chevron-left' size={30} color={whiteLessTransparent} onPress={() => router.back()}/>
+                    <Text style={styles.headerTitle}>{targetData.title}</Text>
+                </View>
+            </View>
+{/*             <LinearGradient style={styles.header} colors={targetData.colors}>
                 <Image source={targetData.backgroundImage} style={styles.backgroundImage}/>
                 <Text style={styles.targetName}>{targetData.title}</Text>
-            </LinearGradient>
-            <FlatList
-                style={styles.tabsList}
+            </LinearGradient> */}
+            <View style={styles.tabsContainer}>
+                <View style={styles.tabsButtons}>
+                    {tabsButtons.map((tab) => {
+                        const active = tab === activeTab;
+                        return (
+                            <Text 
+                                onPress={() => setActiveTab(tab)}
+                                style={[
+                                    styles.tabButtonText, 
+                                    { 
+                                        transform: [{scale: active ? 1.4 : 1}],
+                                        color: active ? 'white' : whiteSemiTransparent
+                                    }
+                                ]}>{tab}</Text>
+                        )
+                    })}
+                </View>
+                <LinearGradient 
+                    style={styles.flatListLinear} 
+                    colors={['rgba(0,0,0,0.3)', 'rgba(0,0,0,0)']}
+                    
+                >
+                    <FlatList
+                        style={styles.tabsList}
 
-                horizontal
-                data={tabs}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({item}) => item}
-            />
+                        horizontal
+                        data={tabs}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({item}) => item}
+                    />
+                </LinearGradient>
+            </View>
+
+
         </Container>
     )
 }
 
 const styles = StyleSheet.create({
     header: {
+        height: '45%',
+        justifyContent: 'space-between',
         width: '100%',
-        borderRadius: 15,
-        elevation: 5,
-        padding: 20,
-        marginTop: 50,
-        overflow: 'hidden',
-        height: 200
+        paddingVertical: 30
+    },
+    topHeader: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: 10
+    },
+    headerTitle: {
+        fontSize: 20,
+        color: whiteLessTransparent,
+        fontWeight: 'bold'
     },
     targetName: {
         fontSize: 20,
@@ -78,6 +127,41 @@ const styles = StyleSheet.create({
     },
     tabsList: {
         width: '100%',
+
+    },
+    block: {
+        height: '45%',
+
+        width: '100%',
+        paddingVertical: 20
+    },
+    flatListLinear: {
+        height: '100%',
+        width: '100%',
+        paddingTop: 30,
+        borderTopWidth: 2,
+        borderColor: 'rgba(255,255,255,0.1)'
+    },
+    tabsContainer: {
+        width: '120%',
+        height: '50%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    tabsButtons: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
+    tabButtonText: {
+        color: whiteSemiTransparent,
+        fontSize: 14,
+        paddingVertical: 10,
+        width: 80,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center'
 
     }
 })

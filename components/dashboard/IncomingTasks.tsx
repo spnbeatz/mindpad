@@ -52,7 +52,6 @@ export const IncomingTasks = () => {
             <FlatList 
                 data={tasks}
                 keyExtractor={(item) => item.id}
-
                 showsVerticalScrollIndicator={false}
                 renderItem={({item, index}) => {
                     return (

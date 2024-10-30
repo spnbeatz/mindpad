@@ -19,7 +19,7 @@ export const Task = ({
     deleteTask
 }:{
     task: TaskProps,
-    deleteTask?: () => void
+    deleteTask: () => void
 }) => {
 
     const [ done, setDone ] = useState<boolean>(false);
@@ -43,9 +43,9 @@ export const Task = ({
     const handleDoneTask = () => {
         setDone(true);
         setTimeout(() => {   
-            if(deleteTask){
-                deleteTask(); 
-            }
+
+            deleteTask(); 
+
                    
         }, 1000)
         
