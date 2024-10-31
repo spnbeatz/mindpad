@@ -4,6 +4,7 @@ import { Feather } from "@expo/vector-icons";
 import { useState, useRef, useEffect } from "react";
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, withTiming, withDelay } from 'react-native-reanimated';
 import { LinearGradient } from "expo-linear-gradient";
+import { InitialsBox } from "./InitialsBox";
 
 interface TaskProps {
     id: string,
@@ -73,9 +74,9 @@ export const Task = ({
                 <View style={styles.timeLeftBox}>
                     <Text style={styles.timeLeft}>30m</Text>
                 </View>
-                {task.targetColors && <LinearGradient colors={task.targetColors} style={styles.targetInitialsContainer}>
-                    <Text style={styles.initialsText}>{task.targetInitials}</Text>
-                </LinearGradient>}
+                {task.targetColors && 
+                    <InitialsBox colors={task.targetColors} initials={task.targetInitials}/>
+                }
             </View>
 
         </Animated.View>
@@ -121,19 +122,6 @@ const styles = StyleSheet.create({
     nameText: {
         color: whiteLessTransparent,
         fontSize: 15
-    },
-    targetInitialsContainer: {
-        width: 30,
-        height: 25,
-        borderRadius: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        elevation: 5
-    },
-    initialsText: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: whiteLessTransparent
     },
     timeLeftBox: {
         height: 25,
