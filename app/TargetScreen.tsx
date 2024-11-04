@@ -2,7 +2,7 @@ import { Container } from "@/components/container";
 import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity } from "react-native";
 import { TargetProps } from "@/components/TargetListItem";
 import { useRoute, RouteProp } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Loading } from "@/components/Loading";
 import { LinearGradient } from "expo-linear-gradient";
 import { TargetTasksContainer } from "@/components/TargetTasksContainer";
@@ -10,6 +10,7 @@ import { whiteLessTransparent, whiteSemiTransparent } from "@/constants/Colors";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { InitialsBox } from "@/components/InitialsBox";
+import { TargetHabitsContainer } from "@/components/TargetHabitsContainer";
 
 type RouteParams = {
     params: {
@@ -48,9 +49,11 @@ export default function TargetScreen() {
     const router = useRouter();
     const route = useRoute<RouteProp<RouteParams, 'params'>>();
     const { target } = route.params;
-
+    const tabsListRef = useRef<FlatList>(null);
     const [targetData, setTargetData] = useState<TargetProps | null>(null);
     const [activeTab, setActiveTab] = useState<string>(tabsButtons[0]);
+
+    const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
     useEffect(() => {
         if (target) {
@@ -58,7 +61,11 @@ export default function TargetScreen() {
         }
     }, [target]);
 
-    const tabs = [<TargetTasksContainer key="tasks" />];
+    const tabs = [<TargetTasksContainer key="tasks" />, <TargetHabitsContainer key="habits" />];
+
+    const scrollToTaskGroup = (index: number) => {
+        tabsListRef.current?.scrollToIndex({ index, animated: true });
+    };
 
     if (!targetData) {
         return <Loading />;
@@ -116,12 +123,16 @@ export default function TargetScreen() {
             
             <View style={styles.tabsContainer}>
                 <View style={styles.tabsButtons}>
-                    {tabsButtons.map((tab) => {
-                        const active = tab === activeTab;
+                    {tabsButtons.map((tab, index) => {
+                        const active = index === selectedIndex;
                         return (
                             <Text 
                                 key={tab}
-                                onPress={() => setActiveTab(tab)}
+                                onPress={() => {
+                                    setActiveTab(tab)
+                                    setSelectedIndex(index)
+                                    scrollToTaskGroup(index);
+                                }}
                                 style={[
                                     styles.tabButtonText, 
                                     { 
@@ -141,10 +152,22 @@ export default function TargetScreen() {
                 >
                     <FlatList
                         style={styles.tabsList}
+                        ref={tabsListRef}
                         horizontal
                         data={tabs}
+                        snapToAlignment="start"
+                        pagingEnabled
                         keyExtractor={(item, index) => `tab-${index}`} // Lepsze klucze dla tabów
                         renderItem={({ item }) => item}
+                        onScrollToIndexFailed={() => {}}
+                        
+                        onViewableItemsChanged={({ viewableItems }) => {
+                            const visibleItem = viewableItems[0];
+                            if (visibleItem) {
+                                setSelectedIndex(visibleItem.index ?? 0);
+                            }
+                        }}
+                        viewabilityConfig={{ itemVisiblePercentThreshold: 50 }}
                     />
                 </LinearGradient>
             </View>

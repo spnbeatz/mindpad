@@ -161,8 +161,8 @@ export const TargetTasksContainer = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-
-        width: width - 10,
+        paddingRight: 15,
+        width: width + 11,
         height: '100%'
     },
     checkpointItem: {
